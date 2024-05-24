@@ -11,7 +11,14 @@ const pdf = require('html-pdf-node');
 
 const app = express();
 
-app.use(cors());
+const allowedOrigin = 'https://management-final-frontend.vercel.app'; {/* I have to edit his path later */ }
+// Configure CORS middleware
+app.use(cors({
+  origin: allowedOrigin,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -25,17 +32,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Update the MongoDB connection URI to point to your MongoDB Atlas cluster
 // Replace <password> with your actual MongoDB Atlas database password
-// const uri = "mongodb+srv://taha:taha12345678@cluster0.aw5siyq.mongodb.net/";
-// mongoose.connect(uri, { dbName: 'VehicleMng', useNewUrlParser: true, useUnifiedTopology: true })
+const uri = "mongodb+srv://taha:taha12345678@cluster0.aw5siyq.mongodb.net/";
+mongoose.connect(uri, { dbName: 'VehicleMng'})
 
-const uri = "mongodb://localhost:27017/";
-mongoose.connect(uri, { dbName: 'VehicleMng', useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log("Connected to MongoDB Atlas");
-  })
-  .catch((error) => {
-    console.error("Error connecting to MongoDB Atlas:", error);
-  });
+// const uri = "mongodb://localhost:27017/";
+// mongoose.connect(uri, { dbName: 'VehicleMng', useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => {
+//     console.log("Connected to MongoDB Atlas");
+//   })
+//   .catch((error) => {
+//     console.error("Error connecting to MongoDB Atlas:", error);
+//   });
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server Is Running");
