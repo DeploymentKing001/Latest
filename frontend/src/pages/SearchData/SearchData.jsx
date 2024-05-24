@@ -16,7 +16,7 @@ const SearchData = () => {
     if (id) {
       setLoading(true);
       axios
-        .get(`http://localhost:3000/SearchedOccurences/${id}`) // Corrected the API endpoint
+        .get(`https://final-management-app.vercel.app/SearchedOccurences/${id}`) // Corrected the API endpoint
         .then((response) => {
           setDataSearched(response.data);
           console.log("Data fetched:", response.data);

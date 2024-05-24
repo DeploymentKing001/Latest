@@ -39,7 +39,7 @@ const Report = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get("http://localhost:3000/occurencewithstatusthree")
+        axios.get("https://final-management-app.vercel.app/occurencewithstatusthree")
             .then((res) => {
                 console.log(res.data);
                 setResult(res.data);
@@ -70,7 +70,7 @@ const Report = () => {
         const token = localStorage.getItem("token");
         const ReportCreatedBy = jwtDecode(token).username;
 
-        axios.get(`http://localhost:3000/create-pdf/new/${id}?ReportCreatedBy=${ReportCreatedBy}`, { responseType: 'text' })
+        axios.get(`https://final-management-app.vercel.app/create-pdf/new/${id}?ReportCreatedBy=${ReportCreatedBy}`, { responseType: 'text' })
             .then((response) => {
                 const newWindow = window.open();
                 newWindow.document.write(response.data);
@@ -86,14 +86,14 @@ const Report = () => {
         const ReportCreatedBy = jwtDecode(token).username;
         
         try {
-            const response = await axios.get(`http://localhost:3000/u/download-pdf/${id}`, {
+            const response = await axios.get(`https://final-management-app.vercel.app/u/download-pdf/${id}`, {
                 params: {
                     ReportCreatedBy: ReportCreatedBy
                 }
             });
 
             axios({
-                url: `http://localhost:3000/pdf/${id}`,
+                url: `https://final-management-app.vercel.app/pdf/${id}`,
                 method: 'GET',
                 responseType: 'blob', // Important: Set the responseType to 'blob' to receive binary data
             })

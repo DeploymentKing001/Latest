@@ -19,7 +19,7 @@ const ArrivalAtOccurence = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:3000/getnewoccuranceAllStatusWithZero")
+      .get("https://final-management-app.vercel.app/getnewoccuranceAllStatusWithZero")
       .then((response) => {
         setOccurance_hold(response.data)
       })
@@ -28,7 +28,7 @@ const ArrivalAtOccurence = () => {
         console.error("Error fetching data:", error);
       });
     // console.log("Garrson", Occurance_hold)
-    axios.get(`http://localhost:3000/getnewoccuranceocurrencesgarissonwithtruedisabled/${arriveId}`)
+    axios.get(`https://final-management-app.vercel.app/getnewoccuranceocurrencesgarissonwithtruedisabled/${arriveId}`)
       .then((response) => {
         console.log("garisson who are true", response.data.length)
         setalltruegarrisionallgarison(response.data.length)
@@ -73,7 +73,7 @@ const ArrivalAtOccurence = () => {
 
     //direct api call to get av_garsion from newoccrunces table
     axios
-      .get(`http://localhost:3000/getnewoccuranceAllStatus/${id}`)
+      .get(`https://final-management-app.vercel.app/getnewoccuranceAllStatus/${id}`)
       .then((response) => {
         setFindGarission(response.data.av_garison)
         setallgarisonLength(response.data.av_garison.length)
@@ -89,12 +89,12 @@ const ArrivalAtOccurence = () => {
 
   const handleStatus = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3000/occuranceDispatcharrivegarrison/${arriveId}`, { garissonIds })
+    axios.put(`https://final-management-app.vercel.app/occuranceDispatcharrivegarrison/${arriveId}`, { garissonIds })
       .then((response) => {
         // Update Occurance_hold after the arrival status has been successfully updated
         setjugaar(response)
         setFindGarission([])
-        axios.get("http://localhost:3000/getnewoccuranceAllStatusWithZero")
+        axios.get("https://final-management-app.vercel.app/getnewoccuranceAllStatusWithZero")
           .then((response) => {
             setOccurance_hold(response.data);
           })
@@ -110,11 +110,11 @@ const ArrivalAtOccurence = () => {
       console.log("alltruegarrisionallgarison === allgarisonLengths");
       const token = localStorage.getItem("token")
       const InformedOfArrivalBy = jwtDecode(token).username
-      axios.put(`http://localhost:3000/occuranceDispatcharrive/${arriveId}`, { InformedOfArrivalBy })
+      axios.put(`https://final-management-app.vercel.app/occuranceDispatcharrive/${arriveId}`, { InformedOfArrivalBy })
         .then((response) => {
           console.log("data is ", response);
           axios
-            .get("http://localhost:3000/getnewoccuranceAllStatusWithZero")
+            .get("https://final-management-app.vercel.app/getnewoccuranceAllStatusWithZero")
             .then((response) => {
               setOccurance_hold(response.data)
               // console.log("Garrson is ", response.data)
@@ -133,11 +133,11 @@ const ArrivalAtOccurence = () => {
 
       //Arrival Time added
 
-      axios.put(`http://localhost:3000/getnewoccuranceAllStatusWithZero/${arriveId}`)
+      axios.put(`https://final-management-app.vercel.app/getnewoccuranceAllStatusWithZero/${arriveId}`)
         .then((response) => {
           console.log("data is ", response);
           axios
-            .get("http://localhost:3000/getnewoccuranceAllStatusWithZero")
+            .get("https://final-management-app.vercel.app/getnewoccuranceAllStatusWithZero")
             .then((response) => {
               setOccurance_hold(response.data)
               // console.log("Garrson is ", response.data)

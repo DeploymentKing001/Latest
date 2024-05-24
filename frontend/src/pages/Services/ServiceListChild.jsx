@@ -10,7 +10,7 @@ const ServiceListChild = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/getnewoccuranceAll/${id}`)
+      .get(`https://final-management-app.vercel.app/getnewoccuranceAll/${id}`)
       .then((response) => {
         // Set the fetched data in state
         setData(response.data);

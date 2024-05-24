@@ -75,7 +75,7 @@ const ServiceNew = () => {
   useEffect(() => {
     // Fetch data when the component mounts
     axios
-      .get("http://localhost:3000/getoccurance")
+      .get("https://final-management-app.vercel.app/getoccurance")
       .then((response) => {
         // Set the fetched data in state
         setData(response.data);
@@ -87,7 +87,7 @@ const ServiceNew = () => {
       });
 
     axios
-      .get("http://localhost:3000/getnewoccurance")
+      .get("https://final-management-app.vercel.app/getnewoccurance")
       .then((response) => {
         // Set the fetched data in state
         setcountOcc(response.data);
@@ -100,7 +100,7 @@ const ServiceNew = () => {
       });
 
     axios
-      .get("http://localhost:3000/getGarrison")
+      .get("https://final-management-app.vercel.app/getGarrison")
       .then((response) => {
         setNewGarrison(response.data)
         console.log("Garrson", response.data)
@@ -115,7 +115,7 @@ const ServiceNew = () => {
 
 
     axios
-      .get("http://localhost:3000/getGarrisonFalse")
+      .get("https://final-management-app.vercel.app/getGarrisonFalse")
       .then((response) => {
         setGarrsionIdFalse(response.data)
         console.log("GarrsonFalse", response.data)
@@ -177,7 +177,7 @@ const ServiceNew = () => {
 
     // calling coocurence for autofilling( api )
     if (name === "phone") {
-      axios.get(`http://localhost:3000/getoccurencebyphonenumber/${value}`)
+      axios.get(`https://final-management-app.vercel.app/getoccurencebyphonenumber/${value}`)
         .then((res) => {
           console.log("occ is ", res);
           console.log("occurence number is s", res.data.occurance_Number)
@@ -366,16 +366,16 @@ const ServiceNew = () => {
       const token = localStorage.getItem("token")
       const MadeBy = jwtDecode(token).username
 
-      const responsePost = await axios.post("http://localhost:3000/newOccurance", { ...post, MadeBy });
+      const responsePost = await axios.post("https://final-management-app.vercel.app/newOccurance", { ...post, MadeBy });
       console.log(responsePost);
 
       // Call the API to delete old occurrences with status 0 or 2
-      await axios.delete("http://localhost:3000/deleteOldOccurrences", { data: post });
+      await axios.delete("https://final-management-app.vercel.app/deleteOldOccurrences", { data: post });
 
 
       if (StaffIds.length !== 0) {
         console.log("Callled");
-        const updateStaffResponse = await axios.put('http://localhost:3000/updateGarrisoninServiceNew', { dataArray: StaffIds });
+        const updateStaffResponse = await axios.put('https://final-management-app.vercel.app/updateGarrisoninServiceNew', { dataArray: StaffIds });
         console.log("update staff api working", updateStaffResponse);
         console.log("update staff api working");
 
@@ -406,14 +406,14 @@ const ServiceNew = () => {
       }
 
 
-      // const responsePut = await axios.put(`http://localhost:3000/updataGarrison/${GarrisonId}`);
+      // const responsePut = await axios.put(`https://final-management-app.vercel.app/updataGarrison/${GarrisonId}`);
       // console.log(responsePut);
 
-      const responseGetGarrison = await axios.get("http://localhost:3000/getGarrison");
+      const responseGetGarrison = await axios.get("https://final-management-app.vercel.app/getGarrison");
       setNewGarrison(responseGetGarrison.data);
       console.log("Garrison", responseGetGarrison.data);
 
-      const responseGetGarrisonFalse = await axios.get("http://localhost:3000/getGarrisonFalse");
+      const responseGetGarrisonFalse = await axios.get("https://final-management-app.vercel.app/getGarrisonFalse");
       setGarrsionIdFalse(responseGetGarrisonFalse.data);
       console.log("GarrisonFalse", responseGetGarrisonFalse.data);
     } catch (error) {
@@ -456,7 +456,7 @@ const ServiceNew = () => {
   };
 
   const occurenceUpdate = async () => {
-    axios.put(`http://localhost:3000/updateOccurenceInServices`, { post, OccurenceIdForUpdate })
+    axios.put(`https://final-management-app.vercel.app/updateOccurenceInServices`, { post, OccurenceIdForUpdate })
       .then((res) => {
         console.log("data updated", res);
       })
@@ -467,7 +467,7 @@ const ServiceNew = () => {
 
       if (StaffIds.length !== 0) {
         console.log("Callled");
-        const updateStaffResponse = await axios.put('http://localhost:3000/updateGarrisoninServiceNew', { dataArray: StaffIds });
+        const updateStaffResponse = await axios.put('https://final-management-app.vercel.app/updateGarrisoninServiceNew', { dataArray: StaffIds });
         console.log("update staff api working", updateStaffResponse);
         console.log("update staff api working");
 
@@ -500,14 +500,14 @@ const ServiceNew = () => {
       }
 
 
-      // const responsePut = await axios.put(`http://localhost:3000/updataGarrison/${GarrisonId}`);
+      // const responsePut = await axios.put(`https://final-management-app.vercel.app/updataGarrison/${GarrisonId}`);
       // console.log(responsePut);
 
-      const responseGetGarrison = await axios.get("http://localhost:3000/getGarrison");
+      const responseGetGarrison = await axios.get("https://final-management-app.vercel.app/getGarrison");
       setNewGarrison(responseGetGarrison.data);
       console.log("Garrison", responseGetGarrison.data);
 
-      const responseGetGarrisonFalse = await axios.get("http://localhost:3000/getGarrisonFalse");
+      const responseGetGarrisonFalse = await axios.get("https://final-management-app.vercel.app/getGarrisonFalse");
       setGarrsionIdFalse(responseGetGarrisonFalse.data);
       console.log("GarrisonFalse", responseGetGarrisonFalse.data);
     } catch (error) {
