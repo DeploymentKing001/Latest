@@ -9,7 +9,7 @@ const path = require('path');
 
 const app = express();
 
-const allowedOrigin = 'https://old-new-frontend.vercel.app'; {/* I have to edit his path later */ }
+const allowedOrigin = 'https://latest-fronend.vercel.app'; {/* I have to edit his path later */ }
 // Configure CORS middleware
 app.use(cors({
   origin: allowedOrigin,
