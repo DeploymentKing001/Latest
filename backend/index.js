@@ -30,8 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Update the MongoDB connection URI to point to your MongoDB Atlas cluster
 // Replace <password> with your actual MongoDB Atlas database password
-const uri = "mongodb+srv://taha:taha12345678@cluster0.aw5siyq.mongodb.net/";
-mongoose.connect(uri, { dbName: 'VehicleMng' })
+const uri = "mongodb+srv://maazk3611:MWHuY3L0IcmFppYG@cluster0.vpbjarw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+mongoose.connect(uri, { dbName: 'VehicleMng'})
 
 // const uri = "mongodb://localhost:27017/";
 // mongoose.connect(uri, { dbName: 'VehicleMng', useNewUrlParser: true, useUnifiedTopology: true })
