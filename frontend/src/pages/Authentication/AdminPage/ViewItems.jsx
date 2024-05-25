@@ -18,7 +18,7 @@ const ViewItems = () => {
   const [designation, setDesignation] = useState("");
 
   useEffect(() => {
-    axios.get("https://final-management-app.vercel.app/admin/dashboard/viewitems/getRegisteredUser")
+    axios.get("http://localhost:3000/admin/dashboard/viewitems/getRegisteredUser")
       .then((res) => {
         setGetRegisteredUser(res.data);
       });
@@ -33,7 +33,7 @@ const ViewItems = () => {
   };
 
   const handleSave = () => {
-    axios.put(`https://final-management-app.vercel.app/updateOccurence/${selectedUser._id}`, { username, password, designation })
+    axios.put(`http://localhost:3000/updateOccurence/${selectedUser._id}`, { username, password, designation })
       .then((res) => {
         console.log(res);
         // Update the state to reflect the changes
@@ -61,7 +61,7 @@ const ViewItems = () => {
 
   const handleConfirmDelete = () => {
     // Implement delete logic here
-    axios.delete(`https://final-management-app.vercel.app/deleteoccurrence/${selectedUser._id}`)
+    axios.delete(`http://localhost:3000/deleteoccurrence/${selectedUser._id}`)
       .then((res) => {
         console.log("user deleted", res);
         // Update the state to remove the deleted user
@@ -86,7 +86,7 @@ const ViewItems = () => {
           <thead className="thead-dark">
             <tr>
               <th>#</th>
-              <th>nome de usuário</th>
+              <th>Nome de usuário</th>
               <th>Senha</th>
               <th>Designação</th>
               <th>Editar</th>

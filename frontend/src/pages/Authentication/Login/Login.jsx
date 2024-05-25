@@ -59,12 +59,12 @@ const Login = ({ onLoginSuccess }) => {
     console.log("admin called", e.target.name);
     if (validation()) {
       axios
-        .post("https://final-management-app.vercel.app/userLogin", { username, password, isAdmin: e.target.name === 'admin' })
+        .post("http://localhost:3000/userLogin", { username, password, isAdmin: e.target.name === 'admin' })
         .then((res) => {
           if (res.data.user) {
             setSnackbarMessage("Login successful");
             setSnackbarOpen(true);
-            setTimeout(()=>{
+            setTimeout(() => {
               if (e.target.name === "admin") {
                 localStorage.setItem("token1", res.data.user);
                 navigate("/admin/dashboard/");
@@ -73,8 +73,8 @@ const Login = ({ onLoginSuccess }) => {
                 navigate("/");
               }
               onLoginSuccess(true);
-            },3000)
-            } else {
+            }, 3000)
+          } else {
             setSnackbarMessage("Check your username and password");
             setSnackbarOpen(true);
           }
@@ -82,9 +82,9 @@ const Login = ({ onLoginSuccess }) => {
           console.log("err is", err)
           setSnackbarMessage(err.response.data.message || "An error occurred");
           setSnackbarOpen(true);
-          setTimeout(()=>{
+          setTimeout(() => {
             setSnackbarOpen(false);
-          },3000)
+          }, 3000)
           setUsername("");
           setPassword("");
         });

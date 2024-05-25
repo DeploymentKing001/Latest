@@ -6,12 +6,10 @@ const cors = require("cors");
 const fs = require('fs');
 const { log } = require("console");
 const path = require('path');
-const axios = require('axios');
-const pdf = require('html-pdf-node');
 
 const app = express();
 
-const allowedOrigin = 'https://management-final-frontend.vercel.app'; {/* I have to edit his path later */ }
+const allowedOrigin = 'https://old-new-frontend.vercel.app'; {/* I have to edit his path later */ }
 // Configure CORS middleware
 app.use(cors({
   origin: allowedOrigin,
@@ -33,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Update the MongoDB connection URI to point to your MongoDB Atlas cluster
 // Replace <password> with your actual MongoDB Atlas database password
 const uri = "mongodb+srv://taha:taha12345678@cluster0.aw5siyq.mongodb.net/";
-mongoose.connect(uri, { dbName: 'VehicleMng'})
+mongoose.connect(uri, { dbName: 'VehicleMng' })
 
 // const uri = "mongodb://localhost:27017/";
 // mongoose.connect(uri, { dbName: 'VehicleMng', useNewUrlParser: true, useUnifiedTopology: true })
@@ -337,32 +335,15 @@ app.get("/getoccurance", (req, res) => {
     });
 });
 
-//get occuences with matches phoneNumber
-
-// app.get("/getoccurencebyphonenumber/:id", (req, res) => {
-//   const { id } = req.params;
-//   console.log(req.params, 'johan')
-
-//   NewOccuranceModel
-//     .findOne({ phone: id })
-//     .then(function (Occurance) {
-//       console.log(Occurance)
-//       res.json(Occurance);
-//     })
-//     .catch(function (err) {
-//       console.log(err);
-//     });
-// });
-
 
 app.get("/getoccurencebyphonenumber/:id", (req, res) => {
   const { id } = req.params;
   console.log(req.params, 'johan');
 
-  const statusValues = ["0", "2"];
+  // const statusValues = ["0", "2"];
 
   NewOccuranceModel
-    .findOne({ phone: id, Status: { $in: statusValues } })
+    .findOne({ phone: id })
     .then(function (Occurance) {
       console.log(Occurance);
       if (Occurance) {
@@ -1296,44 +1277,6 @@ app.get("/occurencewithstatusthree", (req, res) => {
 
 })
 
-app.get('/u/download-pdf/:id', async (req, res) => {
-  const { id } = req.params;
-  const url = `${req.protocol}://${req.get('host')}/create-downloadable-pdf/new/${id}`;
-
-  try {
-    console.log(`Fetching HTML content from: ${url}`);
-    const response = await axios.get(url);
-    const htmlContent = response.data;
-
-    console.log('HTML content fetched successfully.');
-
-    // Define the options for html-pdf-node
-    const options = {
-      format: 'A3',
-      printBackground: true, // Ensure background images and colors are printed
-      preferCSSPageSize: true,
-    };
-
-    // Create a file with the HTML content
-    const file = { content: htmlContent };
-
-    // Generate PDF from HTML
-    const pdfBuffer = await pdf.generatePdf(file, options);
-
-    // Define the output path
-    const outputPath = path.join(__dirname, 'public', `pdf-${id}.pdf`);
-
-    // Save the PDF to the specified path
-    fs.writeFileSync(outputPath, pdfBuffer);
-
-    console.log('PDF saved:', outputPath);
-    res.send(`PDF saved at ${outputPath}`);
-  } catch (err) {
-    console.error('Error creating PDF:', err);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
 app.get('/view-pdf/new/:id', async (req, res) => {
   const id = req.params.id;
   const { ReportCreatedBy } = req.query;
@@ -1419,4 +1362,20 @@ app.get('/pdf/:id', (req, res) => {
       }
     });
   });
+});
+
+app.post('/create-pdf/:id', async (req, res) => {
+  const id = req.params.id;
+  const { ReportCreatedBy } = req.body;
+
+  try {
+    const occurrence = await NewOccuranceModel.findById(id);
+    const report = await reportSchemaModel.findOne({ IdOfOccurence: occurrence._id });
+
+    // Return the required data
+    res.json({ occurrence, report, ReportCreatedBy });
+  } catch (err) {
+    console.error('Error generating data:', err);
+    return res.status(500).send('Error generating data');
+  }
 });

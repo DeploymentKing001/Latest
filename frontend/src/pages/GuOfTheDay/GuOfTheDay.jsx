@@ -23,7 +23,7 @@ const GuOfTheDay = () => {
     // Fetch data when the component mounts
     setLoading(true);
     axios
-      .get("https://final-management-app.vercel.app/getnewoccuranceAllStatus")
+      .get("http://localhost:3000/getnewoccuranceAllStatus")
       .then((response) => {
         // Set the fetched data in state
         SetOccurance_hold(response.data);
@@ -35,7 +35,7 @@ const GuOfTheDay = () => {
 
 
     axios
-      .get("https://final-management-app.vercel.app/getGarrison")
+      .get("http://localhost:3000/getGarrison")
       .then((response) => {
         setGarisonFalse(response.data)
         console.log("Garrson finded are", GarisonFalse)
@@ -128,10 +128,10 @@ const GuOfTheDay = () => {
     const token = localStorage.getItem("token")
     const DispatchBy = jwtDecode(token).username
 
-    axios.put(`https://final-management-app.vercel.app/occuranceDispatch/${occuranceId}`, { DispatchBy })
+    axios.put(`http://localhost:3000/occuranceDispatch/${occuranceId}`, { DispatchBy })
       .then((response) => {
         console.log("data is ", response);
-        axios.get("https://final-management-app.vercel.app/getnewoccuranceAllStatus")
+        axios.get("http://localhost:3000/getnewoccuranceAllStatus")
           .then((response) => {
             SetOccurance_hold(response.data);
           })
@@ -145,7 +145,7 @@ const GuOfTheDay = () => {
       });
 
     // dispatch time added 
-    axios.put(`https://final-management-app.vercel.app/occuranceDispatchTime/${occuranceId}`)
+    axios.put(`http://localhost:3000/occuranceDispatchTime/${occuranceId}`)
       .then((response) => {
         console.log("data is ", response.data);
 
@@ -154,11 +154,11 @@ const GuOfTheDay = () => {
         console.error('Error fetching vehicle data:', error);
       });
 
-    axios.put(`https://final-management-app.vercel.app/updataGarrison`, { dataArray: bunchId })
+    axios.put(`http://localhost:3000/updataGarrison`, { dataArray: bunchId })
       .then((response) => {
         console.log(response);
         // Fetch updated GarisonFalse data after dispatch
-        axios.get("https://final-management-app.vercel.app/getGarrison")
+        axios.get("http://localhost:3000/getGarrison")
           .then((response) => {
             setGarisonFalse(response.data);
             console.log("Newly Garrson finded are", GarisonFalse)
@@ -172,7 +172,7 @@ const GuOfTheDay = () => {
         console.error('Error fetching vehicle data:', error);
       });
 
-    axios.put(`https://final-management-app.vercel.app/occuranceDispatchGarison/${occuranceId}`, { dataArray: av_garison })
+    axios.put(`http://localhost:3000/occuranceDispatchGarison/${occuranceId}`, { dataArray: av_garison })
       .then((response) => {
         console.log(response);
       })
