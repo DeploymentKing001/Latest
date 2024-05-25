@@ -4,6 +4,8 @@ import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import { jwtDecode } from 'jwt-decode'
 import ClearAllButton from "../../components/ClearAllButton/ClearAllButton";
+import './style.css'
+
 // import { Experimental_CssVarsProvider } from "@mui/material";
 
 
@@ -787,7 +789,7 @@ const ServiceNew = () => {
                 </div>
               </div>
 
-              <div className=" col-md-5 col-sm-12 unavalible_garison ml-5">
+              <div className=" col-md-5 col-sm-12 unavalible_garison ml-5 mar-pad">
                 <h3 className="text-center">Garnição Indisponível</h3>
 
 
