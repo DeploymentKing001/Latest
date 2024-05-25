@@ -40,7 +40,7 @@ const Report = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get("http://localhost:3000/occurencewithstatusthree")
+        axios.get("https://latest-nu.vercel.app/occurencewithstatusthree")
             .then((res) => {
                 console.log(res.data);
                 setResult(res.data);
@@ -71,7 +71,7 @@ const Report = () => {
         const token = localStorage.getItem("token");
         const ReportCreatedBy = jwtDecode(token).username;
 
-        axios.get(`http://localhost:3000/create-pdf/new/${id}?ReportCreatedBy=${ReportCreatedBy}`, { responseType: 'text' })
+        axios.get(`https://latest-nu.vercel.app/create-pdf/new/${id}?ReportCreatedBy=${ReportCreatedBy}`, { responseType: 'text' })
             .then((response) => {
                 const newWindow = window.open();
                 newWindow.document.write(response.data);
@@ -87,14 +87,14 @@ const Report = () => {
         const ReportCreatedBy = jwtDecode(token).username;
 
         try {
-            const response = await axios.get(`http://localhost:3000/u/download-pdf/${id}`, {
+            const response = await axios.get(`https://latest-nu.vercel.app/u/download-pdf/${id}`, {
                 params: {
                     ReportCreatedBy: ReportCreatedBy
                 }
             });
 
             axios({
-                url: `http://localhost:3000/pdf/${id}`,
+                url: `https://latest-nu.vercel.app/pdf/${id}`,
                 method: 'GET',
                 responseType: 'blob', // Important: Set the responseType to 'blob' to receive binary data
             })
@@ -365,7 +365,7 @@ const Report = () => {
         const ReportCreatedBy = jwtDecode(token).username;
         console.log(ReportCreatedBy)
         // Send ID and ReportCreatedBy to backend to generate PDF
-        axios.post(`http://localhost:3000/create-pdf/${id}`, { ReportCreatedBy })
+        axios.post(`https://latest-nu.vercel.app/create-pdf/${id}`, { ReportCreatedBy })
             .then((response) => {
 
                 const { occurrence, report, ReportCreatedBy } = response.data;

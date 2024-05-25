@@ -50,7 +50,7 @@ const ClosingOccurence = () => {
       console.log("phone called");
       console.log(id); // Assuming `id` identifies the object in formFields array
 
-      axios.get(`http://localhost:3000/getoccurencebyphonenumber/${value}`)
+      axios.get(`https://latest-nu.vercel.app/getoccurencebyphonenumber/${value}`)
         .then((res) => {
           console.log("occ is ", res.data);
 
@@ -128,7 +128,7 @@ const ClosingOccurence = () => {
     setFormFields(updatedFields);
   };
   useEffect(() => {
-    axios.get("http://localhost:3000/getSaveOccurence")
+    axios.get("https://latest-nu.vercel.app/getSaveOccurence")
       .then((res) => {
         // console.log("getSaveOccurence",res.data);
         setsavedOccurence(res.data)
@@ -138,7 +138,7 @@ const ClosingOccurence = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:3000/getnewoccuranceAllStatusWithZeroAndTwo")
+      .get("https://latest-nu.vercel.app/getnewoccuranceAllStatusWithZeroAndTwo")
       .then((response) => {
         setClosingOccurences(response.data);
         console.log("data fetche is from newOcccurences  ", response.data);
@@ -150,7 +150,7 @@ const ClosingOccurence = () => {
       });
 
     axios
-      .get("http://localhost:3000/getGarrisonAll")
+      .get("https://latest-nu.vercel.app/getGarrisonAll")
       .then((response) => {
         setGarssions(response.data);
         // console.log("Garrson finded are", response.data);
@@ -162,7 +162,7 @@ const ClosingOccurence = () => {
       });
 
 
-    axios.get('http://localhost:3000/newGarissonData')
+    axios.get('https://latest-nu.vercel.app/newGarissonData')
       .then((response) => {
         setGarison(response.data);
         console.log(response.data)
@@ -171,12 +171,12 @@ const ClosingOccurence = () => {
         console.error('Error fetching vehicle data:', error);
       });
 
-    axios.get("http://localhost:3000/getApplicants").then((response) => {
+    axios.get("https://latest-nu.vercel.app/getApplicants").then((response) => {
       setApplicants(response.data);
       console.log(response.data);
     });
 
-    axios.get("http://localhost:3000/getStreet").then((response) => {
+    axios.get("https://latest-nu.vercel.app/getStreet").then((response) => {
       setStreet(response.data);
       console.log(response.data);
     })
@@ -207,7 +207,7 @@ const ClosingOccurence = () => {
     // console.log("handle delete called");
 
 
-    axios.post("http://localhost:3000/createreport", { IdOfOccurence, formFields, description })
+    axios.post("https://latest-nu.vercel.app/createreport", { IdOfOccurence, formFields, description })
       .then((response) => {
         console.log(response)
       })
@@ -216,7 +216,7 @@ const ClosingOccurence = () => {
       })
 
     axios
-      .put(`http://localhost:3000/updataGarrisonToTrue/${id}`)
+      .put(`https://latest-nu.vercel.app/updataGarrisonToTrue/${id}`)
       .then((response) => {
         console.log(response);
       })
@@ -227,7 +227,7 @@ const ClosingOccurence = () => {
     const token = localStorage.getItem("token");
     const ClosedBy = jwtDecode(token).username;
 
-    axios.put(`http://localhost:3000/occuranceclosed/${id}`, { ClosedBy })
+    axios.put(`https://latest-nu.vercel.app/occuranceclosed/${id}`, { ClosedBy })
       .then((response) => {
         console.log("data is ", response);
       })
@@ -237,7 +237,7 @@ const ClosingOccurence = () => {
 
 
     axios
-      .get("http://localhost:3000/getnewoccuranceAllStatusWithZeroAndTwo")
+      .get("https://latest-nu.vercel.app/getnewoccuranceAllStatusWithZeroAndTwo")
       .then((response) => {
         setClosingOccurences(response.data);
         console.log("data fetche is  ", response.data);
@@ -249,7 +249,7 @@ const ClosingOccurence = () => {
       });
 
     axios
-      .put(`http://localhost:3000/updataGarrisonStat`, {})
+      .put(`https://latest-nu.vercel.app/updataGarrisonStat`, {})
       .then((response) => {
         console.log(response);
       })
@@ -258,7 +258,7 @@ const ClosingOccurence = () => {
       });
     setFormFields([{ id: 1, name: "", cpf: "", cep: "", phone: "", street: "", Neighborhood: "", City: "", person: "" }]);
     axios
-      .get("http://localhost:3000/getnewoccuranceAllStatusWithZeroAndTwo")
+      .get("https://latest-nu.vercel.app/getnewoccuranceAllStatusWithZeroAndTwo")
       .then((response) => {
         setClosingOccurences(response.data);
         console.log("data fetche is  ", response.data);
@@ -272,7 +272,7 @@ const ClosingOccurence = () => {
 
   };
   const handleCloseAndDelete = () => {
-    axios.delete(`http://localhost:3000/saveOccurenceDelete/${idForSaving}`)
+    axios.delete(`https://latest-nu.vercel.app/saveOccurenceDelete/${idForSaving}`)
       .then((res) => {
         console.log("Occurence Deteted");
         setOpen(false);
@@ -288,7 +288,7 @@ const ClosingOccurence = () => {
     const token = localStorage.getItem("token");
     const ReportCreatedBy = jwtDecode(token).username;
     console.log(ReportCreatedBy, id)
-    axios.get(`http://localhost:3000/view-pdf/new/${id}?ReportCreatedBy=${ReportCreatedBy}`, { responseType: 'text' })
+    axios.get(`https://latest-nu.vercel.app/view-pdf/new/${id}?ReportCreatedBy=${ReportCreatedBy}`, { responseType: 'text' })
       .then((response) => {
         // Open a new window and write the response HTML to it
         const newWindow = window.open();
@@ -406,7 +406,7 @@ const ClosingOccurence = () => {
     if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
       console.log("escapeKeyDown & backdropClick");
       console.log("saveOccurence", { formFields });
-      axios.put(`http://localhost:3000/saveOccurence/${idForSaving}`, { formFields, description })
+      axios.put(`https://latest-nu.vercel.app/saveOccurence/${idForSaving}`, { formFields, description })
         .then((res) => {
           console.log(res)
           setOpen(false);
@@ -436,9 +436,9 @@ const ClosingOccurence = () => {
   const onActive = (id) => {
     console.log("Active Id", id)
 
-    axios.put(`http://localhost:3000/newGarisonActive/${id}`).then((response) => console.log(response))
+    axios.put(`https://latest-nu.vercel.app/newGarisonActive/${id}`).then((response) => console.log(response))
 
-    axios.get('http://localhost:3000/newGarissonData').then((response) => {
+    axios.get('https://latest-nu.vercel.app/newGarissonData').then((response) => {
       setGarison(response.data);
     })
     //  console.log("getnewgarssiondata stats api working");
@@ -448,8 +448,8 @@ const ClosingOccurence = () => {
   const onInActive = (id) => {
 
     // Update vehicle and staff data
-    axios.put(`http://localhost:3000/newGarisonInActive/${id}`).then((response) => console.log(response))
-    axios.get('http://localhost:3000/newGarissonData').then((response) => {
+    axios.put(`https://latest-nu.vercel.app/newGarisonInActive/${id}`).then((response) => console.log(response))
+    axios.get('https://latest-nu.vercel.app/newGarissonData').then((response) => {
       setGarison(response.data);
     })
 

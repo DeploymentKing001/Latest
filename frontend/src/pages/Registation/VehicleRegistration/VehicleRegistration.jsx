@@ -23,7 +23,7 @@ const VehicleRegistration = () => {
     if (validateForm()) {
       const postData = { ...post, Status: true };
       axios
-        .post("http://localhost:3000/postVehicle", postData)
+        .post("https://latest-nu.vercel.app/postVehicle", postData)
         .then((response) => {
           console.log(response);
           setSubmitStatus('success');
