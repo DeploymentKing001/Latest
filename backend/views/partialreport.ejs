@@ -161,7 +161,7 @@
                 </ul>
             </div>
             <div class="col-md-6 garison-details section border-left">
-                <h2>Detalhes do Batalhão</h2>
+                <h2>Guarnição</h2>
                 <ul>
                     <% occurrence.av_garison.forEach(function(garison, index) { %>
                         <% if (index> 0) { %>
@@ -169,9 +169,6 @@
                             <% } %>
                                 <li><strong>Nome do Batalhão:</strong>
                                     <%= garison.garissonName %>
-                                </li>
-                                <li><strong>ID do Batalhão:</strong>
-                                    <%= garison.garissonId %>
                                 </li>
                                 <li><strong>Tempo de Despacho:</strong>
                                     <%= garison.DispachTime==='Notarrived' ? 'Não chegou' : new
