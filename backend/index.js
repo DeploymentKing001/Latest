@@ -9,7 +9,7 @@ const path = require('path');
 
 const app = express();
 
-const allowedOrigin = 'https://66573de3b19fd028cc066d3f--clever-gnome-d480fc.netlify.app'; {/* I have to edit his path later */ }
+const allowedOrigin = 'https://66574c17a6881a35c6277b95--storied-frangollo-2db7b4.netlify.app'; {/* I have to edit his path later */ }
 // Configure CORS middleware
 app.use(cors({
   origin: allowedOrigin,
